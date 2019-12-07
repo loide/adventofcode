@@ -105,6 +105,31 @@ def count_total_orbits(m):
     return sum([len(m[item]) for item in m])
 
 
+def all_the_same(l1, l2):
+    if len(l1) != len(l2):
+        return False
+    return all(i == j for i, j in zip(l1, l2))
+
+
+def minimum_number_of_orbital_transfers(m):
+    # Get the objects list that YOU are orbiting around
+    search_queue = m['YOU']
+
+    # Get the objects list that SAN is orbiting around
+    santa_queue = m['SAN']
+
+    # initialize the count of transfers
+    n_transfers = 0
+
+    # Search for the minimum common orbit object between YOU and SAN
+    for position, item in enumerate(santa_queue):
+        if item in search_queue:
+            n_transfers = search_queue.index(item)
+            break
+
+    return position + n_transfers
+
+
 def main():
     FILEPATH = 'input.txt'
 
@@ -116,6 +141,8 @@ def main():
     # Create orbit map from input file
     orbit_map = mapping_orbits(FILEPATH)
     print("Total orbits:", count_total_orbits(orbit_map))
+    n = minimum_number_of_orbital_transfers(orbit_map)
+    print("Minimum Number of Orbital Transfers:", n)
 
 
 if __name__ == "__main__":
