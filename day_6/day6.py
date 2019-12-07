@@ -118,9 +118,6 @@ def minimum_number_of_orbital_transfers(m):
     # Get the objects list that SAN is orbiting around
     santa_queue = m['SAN']
 
-    # initialize the count of transfers
-    n_transfers = 0
-
     # Search for the minimum common orbit object between YOU and SAN
     for position, item in enumerate(santa_queue):
         if item in search_queue:
