@@ -105,12 +105,6 @@ def count_total_orbits(m):
     return sum([len(m[item]) for item in m])
 
 
-def all_the_same(l1, l2):
-    if len(l1) != len(l2):
-        return False
-    return all(i == j for i, j in zip(l1, l2))
-
-
 def minimum_number_of_orbital_transfers(m):
     # Get the objects list that YOU are orbiting around
     search_queue = m['YOU']
