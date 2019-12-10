@@ -128,21 +128,31 @@ def load_intcode(FILEPATH):
     return intcode_map
 
 
+def calculate_target(FILEPATH, target):
+    for noun in range(100):
+        for verb in range(100):
+            m = load_intcode(FILEPATH)
+            """
+            Before running the program, replace position 1 with the noun value
+            and replace position 2 with the verb value.
+            """
+            m[1] = noun
+            m[2] = verb
+            process_opcode(m)
+            if m[0] == target:
+                return noun, verb, m
+    return None, None, m
+
+
 def main():
     FILEPATH = "input.txt"
-    m = load_intcode(FILEPATH)
 
-    """
-    Before running the program, replace position 1 with the value 12
-    and replace position 2 with the value 2.
-    """
-    m[1] = 12
-    m[2] = 2
-
-    process_opcode(m)
+    target = 19690720
+    noun, verb, m = calculate_target(FILEPATH, target)
 
     # What value is left at position 0 after the program halts?
     print("position 0:", m[0])
+    print("What is 100 * noun + verb?", 100 * noun + verb)
 
 
 if __name__ == "__main__":
